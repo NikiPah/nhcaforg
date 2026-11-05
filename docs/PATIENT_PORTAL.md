@@ -4,6 +4,9 @@ Work is in `NikiPah/nhcaforg`, branch `feature/patient-portal`, based on the
 Milestone 1 contribution. This is a development workflow, not an open assistance
 service. Use fictional application details only. Staff administration is deferred.
 
+See [current verification results](PATIENT_PORTAL_VALIDATION.md) and
+[the account-transfer handoff](HANDOFF.md).
+
 ## Implemented
 
 - Supabase-backed email/password sign-up and sign-in, sign-out, confirmation

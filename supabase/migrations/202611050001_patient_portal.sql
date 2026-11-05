@@ -72,7 +72,7 @@ begin
   select * into current_app from public.patient_applications
     where id = application_id and patient_id = patient for update;
   if not found then raise exception 'Application unavailable' using errcode = '42501'; end if;
-  if current_app.status <> 'draft' or current_app.version <> expected_version then
+  if expected_version is null or expected_version < 1 or current_app.status <> 'draft' or current_app.version <> expected_version then
     raise exception 'Draft has changed' using errcode = '40001';
   end if;
   if jsonb_typeof(draft) <> 'object' or draft is null then raise exception 'Invalid draft'; end if;

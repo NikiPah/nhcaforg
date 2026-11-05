@@ -29,9 +29,10 @@ embedded PostgreSQL rule tests, and local live integration tests are written.
 The default portal stays closed. No provider credentials are configured and no
 real patient information has been used.
 
-The embedded PostgreSQL/schema tests executed **12 tests, all passed**.
-Lint/types passed before the final changes. The first patient production build
-passed; final checks must be rerun after later edits.
+The final independent checks passed: frozen reinstall, lint, TypeScript,
+**12 embedded PostgreSQL/schema tests**, production build, and **20 desktop/mobile
+browser tests** of the default site and unconfigured portal. See
+`PATIENT_PORTAL_VALIDATION.md` for scope and the live integration blocker.
 
 **Live Supabase integration remains blocked:** `supabase start` could not pull
 images from `public.ecr.aws` (HTTP 403). A network allowance was saved in this
@@ -44,8 +45,9 @@ environment settings. Do not bypass the proxy or disable verification.
 
 1. Inspect the current branch and preserve local changes. Each task is isolated;
    use the existing checkout, without a worktree unless the user asks for one.
-2. Run lint, types, the 12 database/schema tests, production build, and normal
-   disabled-mode browser tests. Record actual current results.
+2. After code or setup changes, rerun the relevant lint, type, database/schema,
+   production-build and browser checks. Avoid repeating unchanged passing checks
+   unless new changes or failures justify it.
 3. Confirm `public.ecr.aws` is allowed in the running environment, then start the
    local Supabase stack and run `npm run test:patient:local` as documented.
    Diagnose any failures instead of treating unrun tests as passing.

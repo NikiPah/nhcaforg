@@ -96,6 +96,7 @@ test("stale versions cannot overwrite a newer draft", async () => {
   const id = await create();
   await save(id);
   await assert.rejects(save(id), /Draft has changed/);
+  await assert.rejects(db.query("select public.save_patient_application($1,null,$2::jsonb,false,false)", [id, JSON.stringify(draft)]), /Draft has changed/);
   const events = await db.query("select * from public.patient_application_events");
   assert.equal(events.rows.length, 2);
 });

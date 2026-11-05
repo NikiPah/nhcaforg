@@ -19,7 +19,7 @@ test("unconfigured protected routes return to information without exposing a rec
 test("confirmation callback cannot act as an open redirect", async ({ request }) => {
   const response = await request.get("/portal/auth/callback?next=https://evil.example.com", { maxRedirects: 0 });
   expect(response.status()).toBe(307);
-  const location = new URL(response.headers().location);
-  expect(location.hostname).toBe("127.0.0.1");
+  const location = new URL(response.headers().location, response.url());
+  expect(location.origin).toBe(new URL(response.url()).origin);
   expect(location.pathname).toBe("/portal");
 });
