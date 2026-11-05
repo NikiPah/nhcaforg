@@ -1,9 +1,9 @@
-name: Validate foundations
+name: Validate website and patient portal
 
 on:
   pull_request:
   push:
-    branches: [main, feature/milestone-1-foundations]
+    branches: [main, feature/milestone-1-foundations, feature/patient-portal]
 
 permissions:
   contents: read
@@ -21,6 +21,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
+      - run: npm run test:unit
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm test

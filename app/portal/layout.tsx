@@ -4,7 +4,7 @@ import { PlatformLayout } from "@/components/PlatformLayout";
 
 export const metadata: Metadata = {
   title: "Patient Portal — In Development | NHCAF",
-  description: "The NHCAF patient portal is not operational. No accounts, applications, or uploads are available.",
+  description: "NHCAF patient portal development. Real assistance applications and document uploads are not open.",
   alternates: { canonical: "/portal" },
   robots: { index: false, follow: false },
 };

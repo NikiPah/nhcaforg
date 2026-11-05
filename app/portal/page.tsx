@@ -1,7 +1,28 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { connection } from "next/server";
+import { patientConfig } from "@/lib/patient/config";
+import { DevelopmentNotice } from "@/components/patient/DevelopmentNotice";
 import { NotOpenNotice, PageIntro, PlannedFeature } from "@/components/PlatformLayout";
 
-export default function PatientPortalPage() {
+async function PatientPortalContent() {
+  await connection();
+  if (patientConfig()) return (
+    <>
+      <PageIntro eyebrow="Patient portal · Development" title="A place to begin, and return to">
+        <p>Explore the NHCAF patient application process with a test account. Save a draft, return at your own pace, and follow your test submission.</p>
+      </PageIntro>
+      <div className="mx-auto max-w-4xl space-y-8 px-4 py-12 sm:px-6">
+        <DevelopmentNotice />
+        <div className="flex flex-wrap gap-4">
+          <Link href="/portal/login" className="rounded-full bg-teal-800 px-6 py-3 font-semibold text-white hover:bg-teal-900">Sign in</Link>
+          <Link href="/portal/register" className="rounded-full border border-teal-800 px-6 py-3 font-semibold text-teal-800 hover:bg-teal-50">Create a test account</Link>
+          <Link href="/portal/dashboard" className="px-3 py-3 font-semibold text-teal-800 underline underline-offset-4">My applications</Link>
+        </div>
+        <p className="text-ink-soft">Real applications and document uploads are not open. <Link href="/apply" className="font-semibold text-teal-800 underline underline-offset-4">Read about the planned application</Link>.</p>
+      </div>
+    </>
+  );
   return (
     <>
       <PageIntro eyebrow="Patient portal · Coming soon" title="Your future place to manage assistance">
@@ -21,4 +42,8 @@ export default function PatientPortalPage() {
       </div>
     </>
   );
+}
+
+export default function PatientPortalPage() {
+  return <Suspense fallback={<p className="p-8" role="status">Loading patient portal…</p>}><PatientPortalContent /></Suspense>;
 }

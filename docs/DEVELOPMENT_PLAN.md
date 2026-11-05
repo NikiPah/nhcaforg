@@ -13,7 +13,12 @@
   route metadata, missing data endpoints, and donation fallback behavior.
 - [x] Complete lint, type, browser-test, and production build validation (results in `VALIDATION.md`).
 - [ ] Review contribution in `NikiPah/nhcaforg`.
-- [ ] Integrate the reviewed contribution into the existing upstream Git history.
+- [ ] Merge the reviewed contribution into this repository's main branch after approval.
+
+The user selected **NikiPah/nhcaforg only** for continued development. Upstream
+integration is deferred. The next priority is the **patient application portal**,
+using **Supabase**. See `PATIENT_PORTAL.md` and `HANDOFF.md` for the current
+development implementation and live-backend testing blocker. Admin work follows.
 
 ## Next milestone — database and security foundation
 
@@ -60,10 +65,9 @@ until security and operational requirements have been approved.
 
 ## Open questions
 
-- Which authentication, database, and storage providers are approved?
+- Supabase is selected; which isolated hosted development project will be used?
 - Who approves eligibility criteria, questionnaires, consent, and patient messages?
 - What are staff case scopes, financial controls, and separation-of-duties rules?
 - What retention, deletion, incident response, and compliance requirements apply?
-- Who can grant access to `nhcafoundation/nhcaf-platform` for upstream integration?
 - Are there additional project decisions in the shared chat? Its link was blocked
   by this environment; the text/export has not been read.

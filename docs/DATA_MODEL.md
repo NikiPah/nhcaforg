@@ -1,5 +1,12 @@
 # Application data model — proposed, not deployed
 
+The patient portal branch now implements the development-only subset
+`patient_profiles`, `patient_applications`, and `patient_application_events`
+with Supabase Auth ownership and constrained write functions. See
+`supabase/migrations/202611050001_patient_portal.sql` and `PATIENT_PORTAL.md`.
+This does not implement production intake, staff decisions, or document storage.
+The broader model below remains proposed.
+
 This is a logical design for discussion. There is no database connection,
 migration, seed patient data, authentication service, or storage bucket in
 Milestone 1. Names and fields below are proposals, not approved eligibility policy.
