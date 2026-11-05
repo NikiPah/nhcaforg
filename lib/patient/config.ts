@@ -2,7 +2,7 @@
 export function patientConfig() {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-  if (process.env.PATIENT_PORTAL_MODE !== "development" || !url || !key) return null;
+  if (process.env.PATIENT_PORTAL_MODE !== "development" || !url || !key || !isPublishableKey(key)) return null;
   try {
     portalOrigin();
     const parsed = new URL(url);
@@ -10,6 +10,18 @@ export function patientConfig() {
     return { url: parsed.origin, key };
   } catch {
     return null;
+  }
+}
+
+/** Reject privileged keys; the provider still verifies the actual key. */
+export function isPublishableKey(key: string) {
+  if (key.startsWith("sb_publishable_")) return key.length > "sb_publishable_".length;
+  try {
+    const parts = key.split(".");
+    if (parts.length !== 3) return false;
+    return JSON.parse(Buffer.from(parts[1], "base64url").toString("utf8")).role === "anon";
+  } catch {
+    return false;
   }
 }
 

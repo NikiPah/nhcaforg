@@ -24,6 +24,19 @@ Preserve homepage branding, assistance program copy, and Zeffy donation support.
 
 ## Current state
 
+The user has now selected **hosted Supabase development** to avoid the local
+registry blocker, but has **not created the project yet**. Follow
+`docs/HOSTED_SUPABASE.md`. Ask for its Project URL only once it exists; request
+the publishable key through environment settings, never in chat. Add the exact
+project hostname to networking after it is known. Local Docker startup and the
+`public.ecr.aws` allowance are optional for this selected path.
+
+The hosted-preparation change passed lint, types, 13 database/configuration tests,
+and production build. A read-only `npm run check:patient:hosted` is provided; it
+currently stops because project configuration is absent. It confirms a database
+permission error, rather than treating a generic network/auth rejection as proof
+of patient-table protection. Privileged keys are rejected by configuration.
+
 Patient portal code, Supabase migration, disabled-mode browser tests,
 embedded PostgreSQL rule tests, and local live integration tests are written.
 The default portal stays closed. No provider credentials are configured and no

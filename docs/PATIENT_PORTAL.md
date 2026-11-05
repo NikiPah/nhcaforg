@@ -4,6 +4,11 @@ Work is in `NikiPah/nhcaforg`, branch `feature/patient-portal`, based on the
 Milestone 1 contribution. This is a development workflow, not an open assistance
 service. Use fictional application details only. Staff administration is deferred.
 
+**Current selection: hosted Supabase development.** Start with
+[HOSTED_SUPABASE.md](HOSTED_SUPABASE.md). The user has not created the project yet.
+The local setup below is an optional alternative, not a prerequisite for hosted
+development. The hosted path does not need access to `public.ecr.aws`.
+
 See [current verification results](PATIENT_PORTAL_VALIDATION.md) and
 [the account-transfer handoff](HANDOFF.md).
 

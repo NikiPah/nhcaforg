@@ -11,7 +11,8 @@
     "test:ui": "playwright test --ui",
     "typecheck": "next typegen && tsc --noEmit",
     "test:unit": "node --import tsx --test --test-isolation=none tests/unit/*.test.ts",
-    "test:patient:local": "node scripts/run-patient-integration.mjs"
+    "test:patient:local": "node scripts/run-patient-integration.mjs",
+    "check:patient:hosted": "node --use-env-proxy --import tsx scripts/check-hosted-supabase.ts"
   },
   "dependencies": {
     "@fontsource-variable/source-sans-3": "5.3.1",
