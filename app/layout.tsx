@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
-import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-// Fonts are downloaded at build time and self-hosted by Next.js;
-// no requests are made to Google from visitors' browsers.
-const sourceSans = Source_Sans_3({
+// The same font families are installed from the lockfile and self-hosted.
+// Builds and visitors no longer require a connection to Google Fonts.
+const sourceSans = localFont({
+  src: "../node_modules/@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2",
   variable: "--font-source-sans",
-  subsets: ["latin"],
+  weight: "200 900",
+  display: "swap",
 });
 
-const sourceSerif = Source_Serif_4({
+const sourceSerif = localFont({
+  src: "../node_modules/@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2",
   variable: "--font-source-serif",
-  subsets: ["latin"],
+  weight: "200 900",
+  display: "swap",
 });
 
 const siteTitle = "North Houston Cancer Assistance Foundation | NHCAF";

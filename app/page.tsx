@@ -127,12 +127,12 @@ function Hero() {
             individuals and families affected by cancer who are experiencing financial hardship.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <a
-              href="#apply"
+            <Link
+              href="/apply"
               className="rounded-full bg-teal-800 px-7 py-3.5 text-center text-base font-semibold text-white shadow-sm transition-colors hover:bg-teal-900"
             >
               Apply for Assistance
-            </a>
+            </Link>
             <Link
               href="/donate"
               className="rounded-full bg-teal-800 px-7 py-3.5 text-center text-base font-semibold text-white shadow-sm transition-colors hover:bg-teal-900 sm:min-w-44"
@@ -244,6 +244,9 @@ function WhoWeHelp() {
               updates as our eligibility guidelines and application process are finalized.
             </p>
           </ComingSoonNotice>
+          <Link href="/apply" className="inline-block font-semibold text-teal-800 underline underline-offset-4">
+            Learn about the planned application process →
+          </Link>
         </div>
       </Container>
     </section>
