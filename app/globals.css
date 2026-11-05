@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/*
+ * NHCAF palette — deep teal for trust, warm sand for compassion,
+ * a muted plum accent for the cancer-support context without
+ * relying on ribbon imagery.
+ */
+@theme inline {
+  --color-ink: #1c2b33;
+  --color-ink-soft: #46565f;
+  --color-teal-950: #0b2e33;
+  --color-teal-900: #0f3d44;
+  --color-teal-800: #14525a;
+  --color-teal-700: #1a6670;
+  --color-teal-100: #dcecec;
+  --color-teal-50: #eef6f5;
+  --color-sand-100: #f6efe4;
+  --color-sand-50: #fbf8f2;
+  --color-plum-700: #6a3d63;
+  --color-plum-100: #f1e7ef;
+  --color-line: #e3e0d8;
+
+  --font-sans: var(--font-source-sans);
+  --font-serif: var(--font-source-serif);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-plum-700);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
