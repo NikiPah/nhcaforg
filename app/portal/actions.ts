@@ -11,7 +11,7 @@ export type FormResult = { message?: string; success?: boolean; errors?: Record<
 
 export async function authenticate(_previous: FormResult, form: FormData): Promise<FormResult> {
   const parsed = credentialsSchema.safeParse({ email: form.get("email"), password: form.get("password") });
-  if (!parsed.success) return { message: "Enter a valid email and a password of 12–128 characters." };
+  if (!parsed.success) return { message: "Enter a valid email address and your password." };
   const client = await patientClient();
   const signup = form.get("intent") === "signup";
   if (signup && parsed.data.password.length < 12) return { message: "Use a password of at least 12 characters." };

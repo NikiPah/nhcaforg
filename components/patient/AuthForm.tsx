@@ -19,10 +19,11 @@ export function AuthForm({ intent }: { intent: "login" | "signup" | "reset" | "p
         </label>
       )}
       {intent !== "reset" && (
-        <label className="block font-semibold text-teal-950">Password
-          <input name="password" type="password" autoComplete={intent === "login" ? "current-password" : "new-password"} required minLength={intent === "login" ? 1 : 12} maxLength={128} aria-describedby="password-help" className={inputClass} />
+        <div className="font-semibold text-teal-950">
+          <label htmlFor="patient-password" className="block">Password</label>
+          <input id="patient-password" name="password" type="password" autoComplete={intent === "login" ? "current-password" : "new-password"} required minLength={intent === "login" ? 1 : 12} maxLength={128} aria-describedby="password-help" className={inputClass} />
           <span id="password-help" className="mt-2 block text-sm font-normal text-ink-soft">Use at least 12 characters. Do not reuse a password from another account.</span>
-        </label>
+        </div>
       )}
       {state.message && <p role={state.success ? "status" : "alert"} className="rounded-xl border border-line bg-sand-50 p-4 text-ink">{state.message}</p>}
       <button disabled={pending} className="w-full rounded-full bg-teal-800 px-6 py-3 font-semibold text-white hover:bg-teal-900 disabled:opacity-60">{pending ? "Please wait…" : label}</button>

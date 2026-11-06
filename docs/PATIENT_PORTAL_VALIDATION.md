@@ -1,5 +1,28 @@
 # Patient portal development validation
 
+## Latest patient workflow refinement
+
+The sign-in, dashboard, draft saving and test submission implementation now also
+includes complete read-only submission fields, saved/submitted timestamps,
+pending draft creation, accessible form labels and failed email-link feedback.
+
+- Lint, generated-route TypeScript check and production build: passed.
+- Database/configuration suite: **16 passed**, none failed or skipped.
+- Default-mode browser suite: **20 passed**, none failed or skipped.
+- Hosted configuration test discovery: four desktop/mobile cases listed using
+  explicitly fictional settings; no network calls or actual execution.
+- Hosted runner without configuration: stopped with the expected missing-setting
+  error before network activity. This is a guard check, not a passing live test.
+- Actual authenticated hosted workflow: **four cases unrun**, because the project,
+  publishable key and two confirmed development test accounts are not configured.
+
+The embedded database cases still simulate the JWT subject; they do not prove
+Supabase authentication or email delivery. See HOSTED_SUPABASE.md for the hosted
+runner and environment settings. The historic local results below are retained
+for context; Docker is not required for the selected hosted workflow.
+
+## Earlier development validation
+
 Validated in the cloud environment on November 5, 2026, with Node.js 24.22.1,
 npm 11.9.0, Next.js 16.4.3, and system Chromium.
 

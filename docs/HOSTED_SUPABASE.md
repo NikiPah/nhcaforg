@@ -66,7 +66,41 @@ assume local email auto-confirmation and must **not** be pointed at the hosted
 project. For hosted testing, first create two dedicated fictional test accounts,
 confirm their emails normally, and verify sign-in, save/resume, submission,
 cross-patient denial, sign-out, reset/confirmation links, and session expiry.
-Hosted automated fixtures and complete backend testing remain outstanding.
+
+## Hosted patient workflow tests
+
+The `npm run test:patient:hosted` command now runs the implemented sign-in,
+dashboard, partial draft/save/sign-out/resume, validation, fictional-data
+confirmation, read-only test submission, session-cookie and cross-patient checks
+against the configured hosted development project. It runs two cases at desktop
+and mobile sizes (four cases total). It does not create users, send email, or
+disable confirmation. Password recovery and actual email-link expiry still need
+separate validation.
+
+Supply these **additional** environment settings only for isolated test accounts:
+
+| Name | Value |
+| --- | --- |
+| `PATIENT_TEST_TARGET_URL` | Exact expected development Project URL, matching `SUPABASE_URL`. |
+| `PATIENT_TEST_EMAIL_A`, `PATIENT_TEST_PASSWORD_A` | First dedicated, confirmed development account. |
+| `PATIENT_TEST_EMAIL_B`, `PATIENT_TEST_PASSWORD_B` | Second dedicated, confirmed development account; a different email. |
+
+Enter account values through secure environment settings, never chat or committed
+files. Do not use real patient accounts. The runner requires development mode,
+HTTPS, a publishable/anon key, and an explicitly matching project target. It runs
+the read-only preflight before launching a temporary production app on port 3100.
+No Docker or local Supabase CLI is needed. Run `npm run build` first.
+
+```bash
+PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:patient:hosted
+```
+
+Browser tracing, video, screenshots and automatic failure DOM snapshots are
+disabled for these credential-bearing tests. Sign-in helper errors are generic.
+Successful tests leave fictional application records in the development database
+for review; they do not delete existing data or use a privileged cleanup key.
+The normal `npm test` suite excludes both local and hosted authenticated tests.
+Keep portal variables disabled/unset for that default-mode suite.
 
 ## Current limits
 
@@ -74,8 +108,9 @@ The default portal remains closed. No hosted connectivity, migration application
 email delivery, authenticated patient workflow, or live storage has been verified.
 Do not accept real patient information or enable production intake.
 
-Hosted-preparation verification: lint, TypeScript, all **13** database/configuration
-tests, and the production build passed. The new preflight correctly stops with an
-incomplete-configuration error when no project exists. Its hosted network and
-database checks have not run. The previously recorded 20 default-mode browser
-checks were not repeated for this preparation change.
+Latest verification: lint, TypeScript, all **16** database/configuration tests,
+production build, and all **20** default-mode desktop/mobile browser tests passed.
+Hosted test discovery lists four cases using fictional configuration without
+running them. The hosted runner correctly stops before network activity when
+project/account configuration is missing. Its preflight and four authenticated
+hosted cases remain **unrun** against a real project.

@@ -37,6 +37,19 @@ currently stops because project configuration is absent. It confirms a database
 permission error, rather than treating a generic network/auth rejection as proof
 of patient-table protection. Privileged keys are rejected by configuration.
 
+The latest patient-workflow refinement adds full saved-field submission review,
+dashboard saved/submitted times, pending state for draft creation, accessible
+password/form labels, and email-link failure feedback. It also adds
+`npm run test:patient:hosted` with two confirmed development accounts and a pinned
+project target. The account settings are absent; those four desktop/mobile cases
+are written but not executed. Read HOSTED_SUPABASE.md for the secure fixture setup.
+The latest database/configuration suite has **16** passing tests.
+Lint, types, production build, and all 20 default-mode browser checks also passed
+for this refinement. Hosted test discovery lists four cases, but no live hosted
+case has been executed. The runner stopped before network activity when checked
+without configuration. Do not report discovery or missing-config checks as a
+working patient backend.
+
 Patient portal code, Supabase migration, disabled-mode browser tests,
 embedded PostgreSQL rule tests, and local live integration tests are written.
 The default portal stays closed. No provider credentials are configured and no
@@ -47,12 +60,13 @@ The final independent checks passed: frozen reinstall, lint, TypeScript,
 browser tests** of the default site and unconfigured portal. See
 `PATIENT_PORTAL_VALIDATION.md` for scope and the live integration blocker.
 
-**Live Supabase integration remains blocked:** `supabase start` could not pull
-images from `public.ecr.aws` (HTTP 403). A network allowance was saved in this
-account's environment draft but was not yet applied when last checked. Saved
-environment drafts and this chat do not automatically transfer between accounts.
-In a new account, configure the required network destination in that account's
-environment settings. Do not bypass the proxy or disable verification.
+**Live hosted integration remains blocked:** the user has not provided a
+development project URL or configured the publishable key. No project/account
+settings were present when last inspected. The old local startup failed pulling
+images from `public.ecr.aws`; its obsolete draft allowance was removed after the
+hosted path was selected. It is not a prerequisite for the selected workflow.
+Saved environment drafts and this chat do not automatically transfer between
+accounts. Do not bypass the proxy or disable verification.
 
 ## Next actions
 
@@ -61,9 +75,10 @@ environment settings. Do not bypass the proxy or disable verification.
 2. After code or setup changes, rerun the relevant lint, type, database/schema,
    production-build and browser checks. Avoid repeating unchanged passing checks
    unless new changes or failures justify it.
-3. Confirm `public.ecr.aws` is allowed in the running environment, then start the
-   local Supabase stack and run `npm run test:patient:local` as documented.
-   Diagnose any failures instead of treating unrun tests as passing.
+3. Connect an isolated hosted Supabase development project, add only its exact
+   hostname to networking, apply the reviewed migration once, and configure
+   confirmed test accounts as documented. Run `npm run check:patient:hosted` and
+   `npm run test:patient:hosted`; diagnose failures and record actual outcomes.
 4. Test confirmation, password recovery, expired/revoked sessions, refresh,
    database visibility, and concurrency against the real local backend.
 5. Help the user create an isolated Supabase development project if desired.

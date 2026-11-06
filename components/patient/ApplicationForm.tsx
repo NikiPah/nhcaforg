@@ -24,11 +24,12 @@ export function ApplicationForm({ application }: { application: Application }) {
             { name: "phone", label: "Fictional phone number (optional)", max: 30, hint: "Use a fictional number such as 202-555-0100" },
             { name: "city", label: "Fictional city *", max: 100, hint: "Example: Test City" },
           ].map(field => (
-            <label key={field.name} className="block font-semibold text-teal-950">{field.label}
-              <input name={field.name} value={values[field.name as "contact_name" | "phone" | "city"]} onChange={event => setValues({ ...values, [field.name]: event.target.value })} maxLength={field.max} autoComplete="off" className={inputClass} aria-invalid={!!error(field.name)} aria-describedby={`${field.name}-hint ${field.name}-error`} />
+            <div key={field.name} className="font-semibold text-teal-950">
+              <label htmlFor={field.name} className="block">{field.label}</label>
+              <input id={field.name} name={field.name} value={values[field.name as "contact_name" | "phone" | "city"]} onChange={event => setValues({ ...values, [field.name]: event.target.value })} maxLength={field.max} autoComplete="off" className={inputClass} aria-invalid={!!error(field.name)} aria-describedby={`${field.name}-hint ${field.name}-error`} />
               <span id={`${field.name}-hint`} className="mt-2 block text-sm font-normal text-ink-soft">{field.hint}</span>
               <span id={`${field.name}-error`} className="mt-1 block text-sm font-normal text-plum-700">{error(field.name)}</span>
-            </label>
+            </div>
           ))}
         </div>
       </fieldset>
@@ -41,11 +42,12 @@ export function ApplicationForm({ application }: { application: Application }) {
           </label>
         ))}</div>
         <p id="support-error" className="mt-2 text-sm text-plum-700">{error("support_types")}</p>
-        <label className="mt-6 block font-semibold text-teal-950">Fictional support summary (optional)
-          <textarea name="request_summary" rows={4} maxLength={2000} value={values.request_summary} onChange={event => setValues({ ...values, request_summary: event.target.value })} className={inputClass} aria-describedby="summary-help summary-error" />
+        <div className="mt-6 font-semibold text-teal-950">
+          <label htmlFor="request-summary" className="block">Fictional support summary (optional)</label>
+          <textarea id="request-summary" name="request_summary" rows={4} maxLength={2000} value={values.request_summary} onChange={event => setValues({ ...values, request_summary: event.target.value })} className={inputClass} aria-describedby="summary-help summary-error" />
           <span id="summary-help" className="mt-2 block text-sm font-normal text-ink-soft">Maximum 2,000 characters. Use fictional details only; do not include diagnosis, medical history, financial account details, or identity numbers.</span>
           <span id="summary-error" className="mt-1 block text-sm font-normal text-plum-700">{error("request_summary")}</span>
-        </label>
+        </div>
       </fieldset>
       <fieldset disabled={pending} className="rounded-2xl border border-line bg-sand-50 p-6 sm:p-8">
         <legend className="px-2 font-serif text-xl font-semibold text-teal-950">3. Save or submit for testing</legend>

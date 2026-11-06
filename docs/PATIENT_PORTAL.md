@@ -20,6 +20,9 @@ See [current verification results](PATIENT_PORTAL_VALIDATION.md) and
   refresh in Next.js Proxy, and request-time data access with no shared caching.
 - Patient dashboard, new test applications, partial drafts, save/resume,
   validation, explicit fictional-data confirmation, and read-only test submissions.
+- Dashboard saved/submitted times, a pending creation button, all saved fields
+  shown on submitted applications, accessible form labels, and failed email-link
+  feedback on sign-in.
 - PostgreSQL row-level ownership policies and narrowly scoped write functions.
   No service-role key is used by the application. Each mutation verifies the
   authenticated owner, draft state, and expected version, and records a minimal
@@ -107,6 +110,10 @@ resume, validation, submission, cookies, and cross-patient record isolation.
 The embedded PostgreSQL tests simulate the verified JWT subject and `auth.users`
 table, then apply the actual migration. They validate database rules but do not
 replace Supabase Auth, SMTP, refresh, or full browser-to-backend integration tests.
+
+For the selected hosted workflow, `npm run test:patient:hosted` uses two existing
+confirmed development accounts. See HOSTED_SUPABASE.md for settings and scope.
+It does not rely on the local CLI or generate unconfirmed hosted accounts.
 
 ## Work remaining before real intake
 

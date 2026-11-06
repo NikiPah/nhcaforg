@@ -4,6 +4,7 @@ import { patientApplications } from "@/lib/patient/server";
 import { createApplication } from "@/app/portal/actions";
 import { DevelopmentNotice } from "@/components/patient/DevelopmentNotice";
 import { PatientNav } from "@/components/patient/PatientNav";
+import { CreateApplicationButton } from "@/components/patient/CreateApplicationButton";
 
 async function Dashboard() {
   const applications = await patientApplications();
@@ -18,7 +19,7 @@ async function Dashboard() {
         <p role="alert" className="mt-8 rounded-2xl border border-line p-6">Applications are temporarily unavailable. Refresh the page or try again later.</p>
       ) : (
         <>
-          <form action={createApplication} className="mt-7"><button className="rounded-full bg-teal-800 px-6 py-3 font-semibold text-white hover:bg-teal-900">Start a test application</button></form>
+          <form action={createApplication} className="mt-7"><CreateApplicationButton /></form>
           {applications.length === 0 ? (
             <section className="mt-10 rounded-2xl border border-line bg-sand-50 p-8"><h2 className="font-serif text-2xl font-semibold text-teal-950">A place to begin</h2><p className="mt-3 text-ink-soft">You have no applications yet. Start one above to explore the development process.</p></section>
           ) : (
@@ -28,6 +29,7 @@ async function Dashboard() {
                   <span className="rounded-full bg-teal-50 px-3 py-1 text-sm font-semibold text-teal-800">{app.status === "draft" ? "Draft" : "Submitted for testing"}</span>
                   <h2 className="mt-5 font-serif text-xl font-semibold text-teal-950">Assistance test application</h2>
                   <p className="mt-3 text-sm text-ink-soft">Started {new Date(app.created_at).toLocaleDateString("en-US", { timeZone: "UTC" })}</p>
+                  <p className="mt-2 text-sm text-ink-soft">{app.status === "draft" ? "Last saved" : "Submitted"} {new Date(app.submitted_at ?? app.updated_at).toLocaleString("en-US", { timeZone: "America/New_York", timeZoneName: "short" })}</p>
                   <Link href={`/portal/applications/${app.id}`} className="mt-5 inline-block font-semibold text-teal-800 underline underline-offset-4">{app.status === "draft" ? "Continue application" : "View test submission"} →</Link>
                 </li>
               ))}
