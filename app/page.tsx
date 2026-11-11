@@ -4,7 +4,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import {
   CampaignIcon,
-  ClockIcon,
   CommunityIcon,
   FamilyIcon,
   GlobeIcon,
@@ -86,18 +85,6 @@ function IconBadge({ icon: IconCmp, tone = "teal" }: { icon: Icon; tone?: "teal"
   );
 }
 
-function ComingSoonNotice({ icon: IconCmp = ClockIcon, children }: { icon?: Icon; children: ReactNode }) {
-  return (
-    <div
-      role="note"
-      className="flex items-start gap-4 rounded-2xl border border-plum-700/20 bg-plum-100/60 p-5 sm:p-6"
-    >
-      <IconCmp className="mt-0.5 h-6 w-6 shrink-0 text-plum-700" />
-      <div className="text-base leading-relaxed text-ink">{children}</div>
-    </div>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 /* Sections                                                            */
 /* ------------------------------------------------------------------ */
@@ -128,7 +115,10 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
             <a
-              href="#apply"
+              href="/apply"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Opens in a new tab or window"
               className="rounded-full bg-teal-800 px-7 py-3.5 text-center text-base font-semibold text-white shadow-sm transition-colors hover:bg-teal-900"
             >
               Apply for Assistance
@@ -234,16 +224,27 @@ function WhoWeHelp() {
         <div id="apply" className="space-y-5 self-center scroll-mt-28">
           <h3 className="font-serif text-2xl font-semibold text-teal-950">Applying for assistance</h3>
           <p className="text-lg leading-relaxed text-ink-soft">
-            Detailed eligibility requirements and a secure online application process are being
-            developed.
+            Start with a short assistance inquiry. Tell us about your needs and how to contact you;
+            NHCAF will follow up about eligibility and the next steps.
           </p>
-          <ComingSoonNotice>
-            <p className="font-semibold text-teal-950">Online application — coming soon</p>
-            <p className="mt-1 text-ink-soft">
-              We are not accepting applications through this website yet. Please check back for
-              updates as our eligibility guidelines and application process are finalized.
+          <div className="rounded-2xl border border-teal-700/20 bg-white/70 p-5 sm:p-6">
+            <p className="font-semibold text-teal-950">No account or document upload needed to start</p>
+            <p className="mt-2 text-ink-soft">
+              Applicants must have a cancer diagnosis and household income at or below 300% of the
+              Federal Poverty Guidelines. We will explain how to provide proof of income and cancer
+              diagnosis privately. Assistance depends on eligibility and available resources.
             </p>
-          </ComingSoonNotice>
+          </div>
+          <Link
+            href="/apply"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab or window"
+            className="inline-flex items-center gap-2 rounded-full bg-teal-800 px-6 py-3 font-semibold text-white hover:bg-teal-900"
+          >
+            Apply for Assistance <span aria-hidden="true">↗</span>
+          </Link>
+          <p className="text-sm text-ink-soft">The inquiry form opens in a new tab or window.</p>
         </div>
       </Container>
     </section>

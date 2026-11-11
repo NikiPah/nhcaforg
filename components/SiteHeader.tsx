@@ -54,7 +54,10 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/#apply"
+            href="/apply"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab or window"
             className="hidden rounded-full bg-teal-800 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-900 sm:inline-block"
           >
             Apply for Assistance
@@ -105,7 +108,10 @@ export function SiteHeader() {
           ))}
           <li className="mt-2 sm:hidden">
             <Link
-              href="/#apply"
+              href="/apply"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab or window"
               onClick={close}
               className="block rounded-full bg-teal-800 px-5 py-3 text-center font-semibold text-white hover:bg-teal-900"
             >
