@@ -1,25 +1,28 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const navItems = [
+const navItems: { href: string; label: string; newWindow?: boolean }[] = [
   { href: "/#top", label: "Home" },
   { href: "/#mission", label: "Our Mission" },
   { href: "/#who-we-help", label: "Who We Help" },
   { href: "/#programs", label: "Programs" },
+  { href: "/patient", label: "Patient", newWindow: true },
   { href: "/donate", label: "Donate" },
   { href: "/#about", label: "About" },
   { href: "/#contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
-      <div className="mx-auto flex h-18 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/#top"
           className="flex items-center gap-3"
@@ -37,13 +40,17 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
+        <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="rounded-md px-3 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:bg-teal-50 hover:text-teal-900"
+                  target={item.newWindow ? "_blank" : undefined}
+                  rel={item.newWindow ? "noopener noreferrer" : undefined}
+                  title={item.newWindow ? "Opens in a new tab or window" : undefined}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  className="rounded-md px-3 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:bg-teal-50 hover:text-teal-900 aria-[current=page]:bg-teal-50 aria-[current=page]:text-teal-900"
                 >
                   {item.label}
                 </Link>
@@ -64,7 +71,7 @@ export function SiteHeader() {
           </Link>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-md text-teal-900 hover:bg-teal-50 lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md text-teal-900 hover:bg-teal-50 xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
@@ -92,15 +99,19 @@ export function SiteHeader() {
       <nav
         id="mobile-menu"
         aria-label="Primary mobile"
-        className={`${open ? "block" : "hidden"} border-t border-line bg-white lg:hidden`}
+        className={`${open ? "block" : "hidden"} border-t border-line bg-white xl:hidden`}
       >
         <ul className="mx-auto flex max-w-6xl flex-col px-4 py-3 sm:px-6">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
+                target={item.newWindow ? "_blank" : undefined}
+                rel={item.newWindow ? "noopener noreferrer" : undefined}
+                title={item.newWindow ? "Opens in a new tab or window" : undefined}
+                aria-current={pathname === item.href ? "page" : undefined}
                 onClick={close}
-                className="block rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-teal-50"
+                className="block rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-teal-50 aria-[current=page]:bg-teal-50 aria-[current=page]:text-teal-900"
               >
                 {item.label}
               </Link>
